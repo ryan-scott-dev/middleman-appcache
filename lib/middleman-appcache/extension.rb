@@ -8,7 +8,8 @@ module Middleman
     option :cache, ['index.html'], 'List of directories or files that will be cached.'
     option :network, ['*'], 'Resources that require the user to be online.'
     option :fallback, {}, 'Fallback resources if a resource is unavailable.'
-    
+    option :use_relative, true, 'If the cached files should be generated as relative paths.'
+
     def initialize app, options_hash = {}, &block
       super
       
@@ -16,7 +17,8 @@ module Middleman
       cache_options = options.cache
       network_options = options.network
       fallback_options = options.fallback
-      
+      use_relative = options.use_relative
+
       app.after_build do |builder|
         cache = []
         
@@ -24,7 +26,9 @@ module Middleman
           directory = File.join(config[:build_dir], cache_file_pattern)
           files_to_cache = Dir.glob(directory)
           files_to_cache.each do |file_to_cache|
-            cache << file_to_cache.gsub(config[:build_dir], '')
+            build_dir = config[:build_dir]
+            build_dir = "#{build_dir}/" if use_relative
+            cache << file_to_cache.gsub(build_dir, '')
           end
         end
 

@@ -49,6 +49,7 @@ activate :app_cache do |config|
   config.fallback = {
     '/' => 'offline.html'
   }
+  config.use_relative = false
 end
 ```
 
@@ -73,7 +74,7 @@ NETWORK:
 /logout
 
 FALLBACK:
-/ offline.html
+/ /offline.html
 
 ```
 
@@ -106,6 +107,12 @@ The list of resources that require the user to be online.
 The mapping of fallback resources if a resource is unavailable.
 
 **Default:** `Empty`
+
+### use_relative
+
+If the resources should be treated as relative from the appcache.
+
+**Default:** `true`
 
 ## License
 
