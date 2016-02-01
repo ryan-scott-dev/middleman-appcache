@@ -37,7 +37,7 @@ module Middleman
             build_dir = "#{build_dir}/" if use_relative
             cache << file_to_cache.gsub(build_dir, '')
 	    if version_hash
-	      hash.file file_to_cache
+	      hash.file file_to_cache if File.file? file_to_cache
 	    end
           end
         end
