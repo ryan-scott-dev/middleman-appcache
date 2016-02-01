@@ -50,6 +50,7 @@ activate :app_cache do |config|
     '/' => 'offline.html'
   }
   config.use_relative = false
+  config.version_hash = true
 end
 ```
 
@@ -57,6 +58,8 @@ The above configuration will generate the following appcache:
 
 ```manifest.appcache
 CACHE MANIFEST
+
+# version 1aadc03fe3f695a96d64f1a190b6253e
 
 CACHE:
 /index.html
@@ -111,6 +114,12 @@ The mapping of fallback resources if a resource is unavailable.
 ### use_relative
 
 If the resources should be treated as relative from the appcache.
+
+**Default:** `true`
+
+### version_hash
+
+If a version hash should be generated from the contents of the referenced files.
 
 **Default:** `true`
 

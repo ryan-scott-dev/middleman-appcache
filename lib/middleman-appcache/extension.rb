@@ -9,6 +9,7 @@ module Middleman
     option :network, ['*'], 'Resources that require the user to be online.'
     option :fallback, {}, 'Fallback resources if a resource is unavailable.'
     option :use_relative, true, 'If the cached files should be generated as relative paths.'
+    option :version_hash, true, 'If the contents of the files should be hashed and added as a comment.'
 
     def initialize app, options_hash = {}, &block
       super
@@ -18,6 +19,12 @@ module Middleman
       network_options = options.network
       fallback_options = options.fallback
       use_relative = options.use_relative
+      version_hash = options.version_hash
+
+      if version_hash
+	require 'digest'
+	hash = Digest::MD5.new
+      end
 
       app.after_build do |builder|
         cache = []
@@ -29,12 +36,19 @@ module Middleman
             build_dir = config[:build_dir]
             build_dir = "#{build_dir}/" if use_relative
             cache << file_to_cache.gsub(build_dir, '')
+	    if version_hash
+	      hash.file file_to_cache
+	    end
           end
         end
 
         manifest_file = File.join(config[:build_dir], cache_manifest_filename)
         File.open(manifest_file, "w") do |f|
           f.write "CACHE MANIFEST\n\n"
+
+	  if version_hash
+	    f.write "\# version #{hash.hexdigest}\n\n"
+	  end
 
           f.write "CACHE:\n"
           cache.each do |cache_file|
