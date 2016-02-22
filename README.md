@@ -83,7 +83,7 @@ FALLBACK:
 
 ### cachemanifest
 
-The filename for the generate cache manifest. 
+The filename for the generate cache manifest.
 
 **Default:** `'manifest.appcache'`
 
@@ -91,13 +91,7 @@ The filename for the generate cache manifest.
 
 The list of files, directories, or glob patterns which should be cached.
 
-**Default:** `['index.html']` 
-
-### cache
-
-The list of files, directories, or glob patterns which should be cached.
-
-**Default:** `['index.html']` 
+**Default:** `['index.html']`
 
 ### network
 
