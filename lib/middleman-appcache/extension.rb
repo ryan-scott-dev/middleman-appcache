@@ -73,7 +73,7 @@ module Middleman
           end
         end
 
-        builder.say_status :regenerated, cache_manifest_filename
+         builder.trigger :created, manifest_file
       end
     end
 
