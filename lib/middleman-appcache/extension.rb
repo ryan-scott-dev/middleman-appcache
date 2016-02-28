@@ -13,7 +13,7 @@ module Middleman
 
     def initialize app, options_hash = {}, &block
       super
-      
+
       cache_manifest_filename = options.cache_manifest
       cache_options = options.cache
       network_options = options.network
@@ -22,13 +22,13 @@ module Middleman
       version_hash = options.version_hash
 
       if version_hash
-	require 'digest'
-	hash = Digest::MD5.new
+        require 'digest'
+        hash = Digest::MD5.new
       end
 
       app.after_build do |builder|
         cache = []
-        
+
         cache_options.each do |cache_file_pattern|
           directory = File.join(config[:build_dir], cache_file_pattern)
           files_to_cache = Dir.glob(directory)
@@ -36,9 +36,9 @@ module Middleman
             build_dir = config[:build_dir]
             build_dir = "#{build_dir}/" if use_relative
             cache << file_to_cache.gsub(build_dir, '')
-	    if version_hash
-	      hash.file file_to_cache if File.file? file_to_cache
-	    end
+            if version_hash
+              hash.file file_to_cache if File.file? file_to_cache
+            end
           end
         end
 
@@ -46,9 +46,9 @@ module Middleman
         File.open(manifest_file, "w") do |f|
           f.write "CACHE MANIFEST\n\n"
 
-	  if version_hash
-	    f.write "\# version #{hash.hexdigest}\n\n"
-	  end
+          if version_hash
+            f.write "\# version #{hash.hexdigest}\n\n"
+          end
 
           f.write "CACHE:\n"
           cache.each do |cache_file|

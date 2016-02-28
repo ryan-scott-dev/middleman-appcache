@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ["lib"]
-  
+
   # The version of middleman-core your extension depends on
   s.add_runtime_dependency("middleman-core", [">= 3.3.6"])
 end

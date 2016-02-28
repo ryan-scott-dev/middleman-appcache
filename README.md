@@ -119,4 +119,4 @@ If a version hash should be generated from the contents of the referenced files.
 
 ## License
 
-Middleman Application Cache was created by [Ryan Scott](http://github.com/archytaus) is distributed under the [MIT](http://ryanscott.mit-license.org) license.
+Middleman Application Cache created by [Ryan Scott](http://github.com/archytaus) is distributed under the [MIT](http://ryanscott.mit-license.org) license.
