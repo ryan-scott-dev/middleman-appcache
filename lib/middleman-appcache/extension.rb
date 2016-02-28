@@ -73,7 +73,7 @@ module Middleman
           end
         end
 
-         builder.trigger :created, manifest_file
+        builder.trigger :created, manifest_file
       end
     end
 
